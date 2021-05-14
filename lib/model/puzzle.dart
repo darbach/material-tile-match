@@ -48,9 +48,9 @@ class Puzzle {
           _moves++;
           _state = PuzzleState.revealing;
           tile.state = TileState.selected;
-          if (_selection?.imageIndex == tile.imageIndex) {
+          if (_selection?.pairId == tile.pairId) {
             _matches++;
-            _state = (_matches / 2 >= size)
+            _state = (_matches * 2 >= size)
                 ? PuzzleState.completed
                 : PuzzleState.inProgress;
             tile.state = TileState.solved;

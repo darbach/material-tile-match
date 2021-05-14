@@ -6,7 +6,7 @@ import '../model/tile.dart';
 
 class PuzzleViewModel {
   static const int _size = 28; // number of puzzle tiles
-  static const int _tick = 500; // milliseconds
+  static const _defaultDuration = Duration(milliseconds: 500);
   static const int _reveal = 3000; // milliseconds
 
   final _tileListStreamController;
@@ -34,11 +34,13 @@ class PuzzleViewModel {
 
   Stream<int> get tickStream => _tickStreamController.stream;
 
-  newPuzzle(int imagePoolSize) {
+  newPuzzle(int imagePoolSize, [Duration tickInterval = _defaultDuration]) {
     _puzzle = Puzzle(_size, imagePoolSize, _rng);
     _tickTimer?.cancel();
-    _tickTimer = Timer.periodic(Duration(milliseconds: _tick),
-            (timer) => _tickStreamController.add(timer.tick));
+    _tickTimer = Timer.periodic(
+        tickInterval,
+            (timer) => _tickStreamController
+                .add(tickInterval.inMilliseconds * timer.tick));
   }
 
   select(int tileIndex) {

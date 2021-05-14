@@ -1,12 +1,12 @@
 class Tile {
-  final _imageIndex;
+  final _pairId;
   TileState state;
 
-  Tile(int imageIndex)
-      : _imageIndex = imageIndex,
+  Tile(int pairId)
+      : _pairId = pairId,
         state = TileState.hidden;
 
-  int get imageIndex => _imageIndex;
+  int get pairId => _pairId;
 
 }
 
